@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
-const PORT = 8000;
+const PORT = 6000;
 const bodyParser = require('body-parser');
-const playerRouter = require('./routes/routes');
+const playerRouter = require('../routes/routes');
 const cors = require('cors')
 
-const db = require('./database');
+const db = require('../database');
 
 db.connect()
 

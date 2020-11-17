@@ -4,7 +4,6 @@ const PlayerController = require('../controller/controller');
 
 const playerRouter = express.Router();
 
-
 // Download csv
 playerRouter.get('/download', PlayerController.download);
 
@@ -25,7 +24,7 @@ playerRouter.get('/players/all', (req, res, next) => {
 });
 
 playerRouter.get('/players', async (req, res, next) => {
-
+    
     var sortingQuery
     var ascDesc
     if (req.query.sort){

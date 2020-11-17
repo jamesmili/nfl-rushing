@@ -24,8 +24,7 @@ const {
 const dbConnectionURL = {
     'LOCALURL': `mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`
 };
-
-const databaseConnect = async () => {
+const connect = async () => {
 	try{
 		await mongoose.connect(dbConnectionURL.LOCALURL, options);
 		const db = mongoose.connection;
@@ -40,4 +39,8 @@ const databaseConnect = async () => {
 	}
 }
 
-module.exports = databaseConnect;
+const close = () => {
+	return mongoose.disconnect()
+}
+
+module.exports = { connect, close };
