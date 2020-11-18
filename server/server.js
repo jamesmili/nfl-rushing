@@ -1,9 +1,13 @@
 const express = require('express');
 const app = express();
-const PORT = 8000;
 const bodyParser = require('body-parser');
 const playerRouter = require('./routes/routes');
 const cors = require('cors')
+const dotenv = require('dotenv')
+
+dotenv.config();
+
+const PORT = process.env.SERVER_PORT
 
 const db = require('./database');
 
