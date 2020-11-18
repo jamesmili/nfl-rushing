@@ -1,6 +1,3 @@
-
-  
-
 # NFL-Rushing
 
 We have sets of records representing football players' rushing statistics. All records have the following attributes:
@@ -115,4 +112,11 @@ All data manipulation is handled server-side to reduce the load on the client's 
 
 #### Seeding data
 
-Seeding data into the database is handled in the seed.js file. Running the `npm run seed` command clears the database and then repopulates the database with the data from rushing.json.
+Seeding data into the database is handled by the seed.js file. Running the `npm run seed` command clears the database and then repopulates the database with the data from rushing.json.
+
+## Built with
+* React
+* Redux
+* Node
+* Express
+* MongoDB
