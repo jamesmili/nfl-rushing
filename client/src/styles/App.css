@@ -1,3 +1,6 @@
+body{
+  background-color: #FCFCFC;
+}
 #header{
   font-size: 50px;
 }
@@ -9,9 +12,13 @@
 .content{
   margin-left: auto;
   margin-right: auto;
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: column;
+}
+
+.button{
+  color: black
 }
 
 /* SEARCH BAR */
@@ -30,9 +37,7 @@
 }
 
 /* TABLE FOOTER */
-#table{
-  height: 100%;
-}
+
 #pageGroup{
   height: 100px;
   display: flex; 

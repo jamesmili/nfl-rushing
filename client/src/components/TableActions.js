@@ -55,7 +55,9 @@ class TableAction extends React.Component{
                 <div>
                     <input type="text" id="searchInput" onChange={(e) => this.handleSearch(e)} placeholder="Search…"/>
                 </div>
-                <Button onClick={() => this.convertToCSV()} id="downloadButton" variant="outlined" color="primary">Export to CSV</Button>
+                <div className="button">
+                    <Button onClick={() => this.convertToCSV()} id="downloadButton" variant="outlined" color="inherit">Export to CSV</Button>
+                </div>
             </div>
         )
     }

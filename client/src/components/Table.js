@@ -12,6 +12,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow'
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper'
 
@@ -45,6 +46,7 @@ class Table extends React.Component{
             <TableContainer id="table" component={Paper}>
                 <MatTable stickyHeader size="small">
                     <TableHead>
+                        <TableRow>
                         {HEADERS.map(h => {
                             return ORDER.includes(h) ? 
                             <TableCell
@@ -62,13 +64,13 @@ class Table extends React.Component{
                             </TableCell>
                             : 
                             <TableCell key={h} 
-                                component="div"
                                 variant="head" 
                                 padding='none' 
                                 align='center'>
                                 {h}
                             </TableCell>
                             })}
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                             {this.props.players.data.map(p => {

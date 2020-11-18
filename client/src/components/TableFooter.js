@@ -23,16 +23,20 @@ class TableFooter extends React.Component{
     render(){
         return(
             <div id="pageGroup">
-                <Button onClick={() => this.handleClick(-1)} 
-                    disabled={!this.props.nfl_players.prev_page} 
-                    variant="outlined" color="primary"> 
-                    Prev.
-                </Button>
-                <Button onClick={() => this.handleClick(1)}
-                    disabled={!this.props.nfl_players.next_page} 
-                    variant="outlined" color="primary"> 
-                    Next
-                </Button>
+                <div className="button">
+                    <Button onClick={() => this.handleClick(-1)} 
+                        disabled={!this.props.nfl_players.prev_page || this.state.page < 1} 
+                        variant="outlined" color="inherit"> 
+                        Prev.
+                    </Button>
+                </div>
+                <div className="button">
+                    <Button onClick={() => this.handleClick(1)}
+                        disabled={!this.props.nfl_players.next_page || this.props.nfl_players.data === []} 
+                        variant="outlined" color="inherit"> 
+                        Next
+                    </Button>
+                </div>
             </div>
         )
     }

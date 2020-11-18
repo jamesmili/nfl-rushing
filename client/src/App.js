@@ -8,6 +8,7 @@ import './styles/App.css';
 import Table from './components/Table'
 import TableActions from './components/TableActions'
 import TableFooter from './components/TableFooter'
+import GLOBALS from './config/common'
 
 /* Material UI */
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -30,7 +31,7 @@ class App extends React.Component{
         const order = orderBy !== "" ? "&sort=" + orderBy : ""
         const search = playerSearch !== "" ? "&search=" + playerSearch : ""
 		const page = pageNum !== "" ? "page=" + pageNum : ""
-        axios.get('http://localhost:8000/api/players?' + page + search + order)
+        axios.get(`${GLOBALS.API_ROOT}/api/players?` + page + search + order)
         .then(response => {
             this.setState({ 
                 players: response.data,
@@ -48,16 +49,18 @@ class App extends React.Component{
 		return (
 			<div className="container">
 				<h1 id="header">NFL Rushing</h1>
+				<div className="content">
 				{
 					this.state.loading ? 
 					<div className="loader"><CircularProgress color='inherit'/></div>
 					:
-					<div className="content">
+					<div>
 						<TableActions updateData={this.updateData}/>
 						<Table updateData={this.updateData} players={this.state.players}/>
 						<TableFooter updateData={this.updateData}/>
 					</div>
 				}
+				</div>
 			</div>
 		)
 	}
