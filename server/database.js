@@ -5,13 +5,13 @@ dotenv.config();
 
 // mongoose options
 const options = {
-	useNewUrlParser: true,
-	useFindAndModify: false,
-	useCreateIndex: true,
-	useUnifiedTopology: true,
-	autoIndex: false,
-	poolSize: 10,
-	bufferMaxEntries: 0
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    autoIndex: false,
+    poolSize: 10,
+    bufferMaxEntries: 0
 };
 
 const {
@@ -25,20 +25,20 @@ const dbConnectionURL = {
 };
 
 const connect = async () => {
-	try{
-		await mongoose.connect(dbConnectionURL.LOCALURL, options).catch(err => console.log(err))
-		const db = mongoose.connection;
-		db.on('error', console.error.bind(console, 'Mongodb Connection Error:' + dbConnectionURL.LOCALURL))
-		db.once('open', () => {
-			console.log('Mongodb Connection Successful')
-		});
-	}catch (err){
-		console.log(err)
-	}
+    try{
+        await mongoose.connect(dbConnectionURL.LOCALURL, options).catch(err => console.log(err))
+        const db = mongoose.connection;
+        db.on('error', console.error.bind(console, 'Mongodb Connection Error:' + dbConnectionURL.LOCALURL))
+        db.once('open', () => {
+            console.log('Mongodb Connection Successful')
+        });
+    }catch (err){
+        console.log(err)
+    }
 }
 
 const close = () => {
-	return mongoose.disconnect()
+    return mongoose.disconnect()
 }
 
 module.exports = { connect, close }
