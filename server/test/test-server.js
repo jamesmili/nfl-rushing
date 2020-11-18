@@ -7,6 +7,7 @@ const cors = require('cors')
 
 const db = require('../database');
 
+// server only for testing
 db.connect()
 
 app.use(cors())

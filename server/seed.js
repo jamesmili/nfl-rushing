@@ -21,7 +21,7 @@ seeder.connect(dbConnectionURL.LOCALURL, function(){
     }]
 
 seeder.loadModels(['./models/player.model.js']);
-
+    // clear db before seeding
     seeder.clearModels(['Player'], function() {
         seeder.populateModels(dataToPush, function(err, done) {
             if (err){

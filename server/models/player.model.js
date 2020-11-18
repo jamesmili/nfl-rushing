@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+// Player schema 
 const playerSchema = new mongoose.Schema({
 	"Player": String,
 	"Team": String,

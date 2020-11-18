@@ -7,7 +7,7 @@ const playerRouter = express.Router();
 // Download csv
 playerRouter.get('/download', PlayerController.download);
 
-/* Get all Players */
+// GET all players
 playerRouter.get('/players/all', (req, res, next) => {
     Player.find({}).lean().exec(function(err, result){
         if(err){
@@ -24,10 +24,13 @@ playerRouter.get('/players/all', (req, res, next) => {
     
 });
 
+// GET players with querystring for page number, search player and sort by
 playerRouter.get('/players', async (req, res, next) => {
     
     var sortingQuery
     var ascDesc
+
+    // sort validation
     if (req.query.sort){
         // case insensitive for sorting
         sortingQuery = req.query.sort.toLowerCase()
@@ -44,7 +47,7 @@ playerRouter.get('/players', async (req, res, next) => {
     const page = req.query.page ? req.query.page : 1 // default page is 1
     const pageSize = 20
 
-    // search query optional
+    // search query for .find()
     const query = req.query.search ? {
         Player: {$regex: req.query.search, $options:'i'},
     } : {}
@@ -58,6 +61,7 @@ playerRouter.get('/players', async (req, res, next) => {
                 });
             }
 
+            // Manually sort because Yds and Lng fields are strings
             if (sortingQuery){
                 if (sortingQuery !== 'TD'){
                     var parseA, parseB
@@ -78,6 +82,8 @@ playerRouter.get('/players', async (req, res, next) => {
             // paginate
             const next = page * pageSize < result.length ? true : false
             const prev = (page-1) * pageSize !== 0 ? true : false
+            
+            // slice array to create pagination
             res.status(200).send({
                 success: true,
                 data: result.slice((page-1) * pageSize, page * pageSize),
