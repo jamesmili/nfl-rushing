@@ -10,9 +10,13 @@ import TableCell from '@material-ui/core/TableCell';
 class PlayerRow extends React.Component{
     render(){
         return(
-            <TableRow key={this.props.player['_id']}>
+            <TableRow className="tableRow" key={this.props.player['_id']}>
                 {HEADERS.map(h => {
-                    return <TableCell key={this.props.player['_id']+h} align='center'>{this.props.player[h]}</TableCell>
+                    return (
+                    <TableCell key={this.props.player['_id']+h} >
+                        {this.props.player[h]}
+                    </TableCell>
+                    )
                 })}
             </TableRow>
         )

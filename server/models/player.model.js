@@ -18,5 +18,5 @@ const playerSchema = new mongoose.Schema({
 	"FUM": Number
 });
 
-const Player = mongoose.model("Player", playerSchema);
+const Player = mongoose.model("Player", playerSchema, "Player");
 module.exports = Player;

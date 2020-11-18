@@ -1,28 +1,37 @@
-const Player = require('./models/player.model')
-const data = require('./data/rushing')
+const seeder = require('mongoose-seed')
+const dotenv = require('dotenv')
+const data = require('./data/rushing.json')
 
-// import rushing.json data to db
-const seedPlayers = async () => {
-    try{
-        const playersCollection = await Player.find()
-        // only imports if there's no data in db
-        if (playersCollection.length > 1){
-            return
-        }
-        players = []
-        for (let i = 0; i < data.length; i++){
-            players.push(
-                new Player(data[i])
-            )
-        }
-        await Player.remove()
-        players.forEach(player => {
-            Player.create(player)
-        })
-        
-    }catch (error) {
-        console.log(error)
-    }
-}
+dotenv.config();
 
-module.exports = seedPlayers;
+const {
+    MONGO_HOSTNAME,
+    MONGO_DB,
+    MONGO_PORT
+} = process.env;
+
+const dbConnectionURL = {
+    'LOCALURL': `mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`
+};
+
+seeder.connect(dbConnectionURL.LOCALURL, function(){
+    var dataToPush = [{
+        'model': 'Player',
+        'documents': data
+    }]
+
+seeder.loadModels(['./models/player.model.js']);
+
+    seeder.clearModels(['Player'], function() {
+        seeder.populateModels(dataToPush, function(err, done) {
+            if (err){
+                console.log(err)
+            }
+            if (done){
+                console.log(done)
+            }
+        seeder.disconnect();
+        });
+
+    });
+});

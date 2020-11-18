@@ -3,13 +3,13 @@
 }
 .container{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   text-align: center;
 }
 .content{
   margin-left: auto;
   margin-right: auto;
-  width: 85%;
+  width: 90%;
   display: flex;
   flex-direction: column;
 }
@@ -29,19 +29,18 @@
   font-size: 17px;
 }
 
-
-/* TABLE */
-
-.tableCell{
-  width: 100%;
+/* TABLE FOOTER */
+#table{
+  height: 100%;
 }
-
 #pageGroup{
   height: 100px;
   display: flex; 
   align-items: center; 
   justify-content: center;
 }
+
+/* LOADING STYLE */
 
 .loader{
   width: 120px;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { players } from './actions/action'
 import PropTypes from 'prop-types'
 
-import './App.css';
+import './styles/App.css';
 import Table from './components/Table'
 import TableActions from './components/TableActions'
 import TableFooter from './components/TableFooter'
@@ -33,10 +33,10 @@ class App extends React.Component{
         axios.get('http://localhost:8000/api/players?' + page + search + order)
         .then(response => {
             this.setState({ 
-                players: response.data.data,
+                players: response.data,
 				loading: false,
 			}, () => {
-				this.props.players(response.data.data)
+				this.props.players(response.data)
 			})
         }).catch(error => {
             console.log(error)

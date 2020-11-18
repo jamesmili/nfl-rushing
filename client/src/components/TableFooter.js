@@ -10,7 +10,7 @@ class TableFooter extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            page: 1
+            page: 1,
         }
         this.handleClick = this.handleClick.bind(this)
     }
@@ -24,12 +24,12 @@ class TableFooter extends React.Component{
         return(
             <div id="pageGroup">
                 <Button onClick={() => this.handleClick(-1)} 
-                    disabled={!this.props.nfl_players.prev} 
+                    disabled={!this.props.nfl_players.prev_page} 
                     variant="outlined" color="primary"> 
                     Prev.
                 </Button>
                 <Button onClick={() => this.handleClick(1)}
-                    disabled={!this.props.nfl_players.next} 
+                    disabled={!this.props.nfl_players.next_page} 
                     variant="outlined" color="primary"> 
                     Next
                 </Button>

@@ -37,7 +37,7 @@ PlayerController.download = async (req, res) => {
     } : {}
     try{
         // filter data
-        await Player.find(query , ['-_id', '-__v'], function(err, result){
+        await Player.find(query , ['-_id', '-__v']).lean().exec(function(err, result){
             if(err){
                 res.status(400).send({
                     'success': false,

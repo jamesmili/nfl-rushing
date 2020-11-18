@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const seedPlayer = require('./seed')
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
 
 dotenv.config();
 
@@ -24,15 +23,14 @@ const {
 const dbConnectionURL = {
     'LOCALURL': `mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`
 };
+
 const connect = async () => {
 	try{
-		await mongoose.connect(dbConnectionURL.LOCALURL, options);
+		await mongoose.connect(dbConnectionURL.LOCALURL, options).catch(err => console.log(err))
 		const db = mongoose.connection;
-		db.on('error', console.error.bind(console, 'Mongodb Connection Error:' + dbConnectionURL.LOCALURL));
-		// run seed to populate data
-		seedPlayer()
+		db.on('error', console.error.bind(console, 'Mongodb Connection Error:' + dbConnectionURL.LOCALURL))
 		db.once('open', () => {
-			console.log('Mongodb Connection Successful');
+			console.log('Mongodb Connection Successful')
 		});
 	}catch (err){
 		console.log(err)
@@ -43,4 +41,4 @@ const close = () => {
 	return mongoose.disconnect()
 }
 
-module.exports = { connect, close };
+module.exports = { connect, close }

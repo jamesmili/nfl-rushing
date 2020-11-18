@@ -42,24 +42,21 @@ class Table extends React.Component{
     
     render(){
         return(
-            <TableContainer component={Paper}>
-                <MatTable stickyHeader>
-                    <TableHead id="tableHeader">
+            <TableContainer id="table" component={Paper}>
+                <MatTable stickyHeader size="small">
+                    <TableHead>
                         {HEADERS.map(h => {
                             return ORDER.includes(h) ? 
                             <TableCell
-                                component="div"
+                                align="center"
                                 variant="head"
                                 key={h}
                                 padding='none'
-                                align='center'
-                                size='small'
                                 onClick={(e) => this.handleRequestSort(e.target.textContent)}
                                 sortDirection={this.state.orderBy === h ? this.state.ascDesc : false}>
                                 <TableSortLabel
                                     active={this.state.orderBy === h}
-                                    direction={this.state.orderBy === h ? this.state.ascDesc : 'asc'}
-                                >
+                                    direction={this.state.orderBy === h ? this.state.ascDesc : 'asc'}>
                                     <p>{h}</p>
                                 </TableSortLabel>
                             </TableCell>
@@ -68,14 +65,13 @@ class Table extends React.Component{
                                 component="div"
                                 variant="head" 
                                 padding='none' 
-                                align='center'
-                                size='small'>
+                                align='center'>
                                 {h}
                             </TableCell>
                             })}
                     </TableHead>
                     <TableBody>
-                            {this.props.players.player_info.map(p => {
+                            {this.props.players.data.map(p => {
                                 return <PlayerRow key={p['_id']} player={p}/>
                             })}
                     </TableBody>
