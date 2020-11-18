@@ -1,0 +1,42 @@
+version: "3.7"
+services:
+  react-app:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      - nfl-rushing
+  api-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment: 
+      - MONGO_HOSTNAME=mongo
+      - MONGO_DB=playersdb
+      - MONGO_PORT=27017
+    ports:
+      - "8000:8000"
+    links:
+      - mongo
+    networks:
+      - nfl-rushing
+    depends_on:
+      - mongo
+    command: bash -c "npm run seed && npm run start"
+  mongo:
+    image: mongo:3.6.21-xenial
+    ports:
+      - "27017:27017"
+    networks:
+      - nfl-rushing
+    volumes:
+      - mongo-data:/data/db   
+networks:
+  nfl-rushing:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
