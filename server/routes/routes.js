@@ -15,6 +15,7 @@ playerRouter.get('/players/all', (req, res, next) => {
                 'success': false,
                 'error': err.message
             });
+            return
         }
         res.status(200).send({
             'success': true,
@@ -29,6 +30,15 @@ playerRouter.get('/players', async (req, res, next) => {
     
     var sortingQuery
     var ascDesc
+
+    //page number validation
+    if (parseInt(req.query.page) < 1){
+        res.status(400).send({
+            'success': false,
+            'message': "Page number must be greater than 0"
+        })
+        return
+    }
 
     // sort validation
     if (req.query.sort){
@@ -59,6 +69,15 @@ playerRouter.get('/players', async (req, res, next) => {
                     'success': false,
                     'error': err.message
                 });
+                return
+            }
+            // page number doesn't exist
+            if (page*pageSize > result.length && result.slice((page-1) * pageSize, page * pageSize).length === 0){
+                res.status(404).send({
+                    'success': false,
+                    'error': "Page doesn't exist"
+                })
+                return
             }
 
             // Manually sort because Yds and Lng fields are strings
@@ -82,7 +101,6 @@ playerRouter.get('/players', async (req, res, next) => {
             // paginate
             const next = page * pageSize < result.length ? true : false
             const prev = (page-1) * pageSize !== 0 ? true : false
-            
             // slice array to create pagination
             res.status(200).send({
                 success: true,
